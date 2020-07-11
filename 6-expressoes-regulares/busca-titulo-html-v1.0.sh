@@ -1,24 +1,26 @@
 #!/usr/bin/env bash
 #
-# cotarBitcoin.sh - Verifica a última cotação do Bitcoin
+# busca-titulo-html.sh - Apresenta os titulos dos posts do blog Lxer
 #
 # Site:       http://grings.life
 # Autor:      Felipe Grings
 # Manutenção: Felipe Grings
 #
 # ------------------------------------------------------------------------ #
-#  Este programa irá cotar o último valor do Bitcoin com base na API xxxx
+#  Este programa irá realizar um CURL no endereço lxer.com, retornar e grava
+#  todo o html no endereço .html. Após ira selecionar apenas as divs do titulos
+#  separando pela div.class blurb. Em seguida realizará o corte do Span e ficará
+#  apenas com o Titulo Original
 #
 #  Exemplos:
-#      $ ./cotarBitcoin.sh -d 1
-#      Neste exemplo o script será executado no modo debug nível 1.
+#      $ ./busca-titulo-html.sh
+#      Neste exemplo irá buscar os titulos dos posts do blog Lxer.
 # ------------------------------------------------------------------------ #
 # Histórico:
 #
-#   v1.0 10/10/2020, Felipe:
+#   v1.0 09/07/2020, Felipe:
 #       - Início do programa
-#       - Conta com a funcionalidade X
-#   v1.1 10/10/2018, Felipe:
+#   v1.1 09/07/2020, Lucas:
 #       - Alterado parametro XXXXX
 # ------------------------------------------------------------------------ #
 # Testado em:
@@ -26,7 +28,11 @@
 # ------------------------------------------------------------------------ #
 
 # ------------------------------- VARIÁVEIS ----------------------------------------- #
+INDEX_LXER=""
+DIV_TITULOS=""
+TITULOS=""
 
+ROXO="\033[35;1m"
 # ------------------------------------------------------------------------ #
 
 # ------------------------------- TESTES ----------------------------------------- #
@@ -38,5 +44,14 @@
 # ------------------------------------------------------------------------ #
 
 # ------------------------------- EXECUÇÃO ----------------------------------------- #
+INDEX_LXER="$(curl http://lxer.com )"
+[ INDEX_LXER ] || INDEX_LXER="$(cat inde-lxer.html)"
 
+DIV_TITULOS=$(echo "$INDEX_LXER" | grep blurb)
+
+TITULOS=$(echo "$DIV_TITULOS" | sed 's/<div.*line">//;s/<\/span.*//')
+
+for i in "$TITULOS"; do
+  echo -e "$ROXO $i"
+done
 # ------------------------------------------------------------------------ #

@@ -18,25 +18,24 @@
 # ------------------------------------------------------------------------ #
 # Histórico:
 #
-#   v1.0 03/10/2018, Felipe:
+#   v1.0 09/07/2020, Felipe:
 #       - Início do programa
-#   v1.1 10/10/2018, Lucas:
-#       - Alterado parametro XXXXX
+#   v1.1 09/07/2020, Lucas:
+#       - Refatorado  conforme o tutorial
 # ------------------------------------------------------------------------ #
 # Testado em:
 #   bash 5.0.16
 # ------------------------------------------------------------------------ #
 
 # ------------------------------- VARIÁVEIS ----------------------------------------- #
-INDEX_LXER=""
-DIV_TITULOS=""
-TITULOS=""
+ARQUIVO_DE_TITULOS="titulos.txt"
 
+VERMELHO="\033[32;1m"
 ROXO="\033[35;1m"
 # ------------------------------------------------------------------------ #
 
 # ------------------------------- TESTES ----------------------------------------- #
-
+[ ! -x "$(which lynx)" ] && sudo apt install lynx -y #Lynx instalado?
 # ------------------------------------------------------------------------ #
 
 # ------------------------------- FUNÇÕES ----------------------------------------- #
@@ -44,14 +43,10 @@ ROXO="\033[35;1m"
 # ------------------------------------------------------------------------ #
 
 # ------------------------------- EXECUÇÃO ----------------------------------------- #
-INDEX_LXER="$(curl http://lxer.com )"
-[ INDEX_LXER ] || INDEX_LXER="$(cat inde-lxer.html)"
+lynx -source https://www.linuxdescomplicado.com.br/ | grep "jeg_post_title\"><a" | sed "s/<h3.*html\">//;s/<\/a.*//" > titulos.txt
 
-DIV_TITULOS=$(echo "$INDEX_LXER" | grep blurb)
-
-TITULOS=$(echo "$DIV_TITULOS" | sed 's/<div.*line">//;s/<\/span.*//')
-
-for i in "$TITULOS"; do
-  echo -e "$ROXO $i"
-done
+while read -r titulo_lxer
+do
+  echo -e "${VERMELHO}Titulo: ${ROXO}$titulo_lxer"
+done < "$ARQUIVO_DE_TITULOS"
 # ------------------------------------------------------------------------ #
