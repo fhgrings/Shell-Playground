@@ -55,7 +55,7 @@ if [[ "$1" = "-v" ]]; then
   echo "$VERSAO" && exit 0
 fi
 if [[ "$1" = "-s" ]]; then
-  echo "$USUARIOS" | sort && exit 0
+  echo "$USUARIOS" | sort -h && exit 0
 fi
 echo "$USUARIOS"
 # ------------------------------------------------------------------------ #

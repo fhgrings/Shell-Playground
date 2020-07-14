@@ -1,0 +1,8 @@
+
+1:Terminar o curso de shell:15/07
+2:Atualizar GitHub: 20/07
+3:Estudar vagas de Trainee:30/7
+3:Reuniao TCC: 30/07
+3:Tes:31/3
+# Banco de dados
+# Prioridade : Tarefa : Prazo

@@ -45,7 +45,7 @@ VERSAO="v1.1"
 case "$1" in
   -h) echo "$MENSAGEM_USO" && exit 0 ;;
   -v) echo "$VERSAO" && exit 0 ;;
-  -s) echo "$USUARIOS" | sort && exit 0 ;;
+  -s) echo "$USUARIOS" | sort -h && exit 0 ;;
    *) echo "$USUARIOS" ;;
 esac
 # ------------------------------------------------------------------------ #

@@ -57,6 +57,6 @@ case "$1" in
    *) echo "$USUARIOS"               ;;
 esac
 
-[ $CHAVE_ORDENA -eq 1 ] && echo "$USUARIOS" | sort && exit 0
+[ $CHAVE_ORDENA -eq 1 ] && echo "$USUARIOS" | sort -h && exit 0
 [ $CHAVE_MAIUSCULO -eq 1 ] && echo "$USUARIOS" | tr [a-z] [A-Z] && exit 0
 # ------------------------------------------------------------------------ #
