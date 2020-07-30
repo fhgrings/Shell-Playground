@@ -1,6 +1,62 @@
  
 
-## Resumo APT+DPKG - RPM - YUM
+# File Hierarchy
+
+
+
+/bin - binários
+
+​		Executaveis do SO (gitkraken, vscode, ...)
+
+/boot - boot do SO
+
+​		Arquivos responsáveis pelo boot do sistema
+
+/dev - devices
+
+​		Dispositivos conectados (moutns, periféricos)
+
+/etc - Etcetera
+
+​		Configurações adicionais dos sistemas	
+
+​		
+
+/home 
+
+​		Arquivos pessoais dos usuiaiors
+
+/media
+
+​		Montagens de periféricos externos como HD, que são conectados diversas vezes
+
+/mnt
+
+​		Montagens periodicas
+
+/opt - optional
+
+​		
+
+/proc - processos
+
+​		Informações sobre os processos, sistema operacional e Hardware
+
+/root
+
+​		Funcionalidades esecificas do root
+
+/sbin
+
+​		binários do SO
+
+/sys
+
+​		
+
+
+
+# Resumo APT+DPKG - RPM - YUM
 
 ​	Apt é o administrador de pacotes .deb do sistema GNU/LINUX, por baixo é utilizado o comando dpkg.
 
@@ -76,7 +132,7 @@ yum remove XXXX
 
 
 
-## Comandos
+# Comandos
 
 #### Comando para buscar o usuário:
 
@@ -94,7 +150,7 @@ yum remove XXXX
 
 
 
-## BASH
+# BASH
 
 #### Histórico de comandos bash
 
@@ -134,7 +190,7 @@ O login interativo vai executar uma ordem diferente de arquivos. Sendo ela:
 
 
 
-## Variaveis Globais e Locais
+# Variaveis Globais e Locais
 
  env = Environment -> Globais
 
@@ -142,7 +198,7 @@ set = Locais
 
 
 
-## File Globbing
+# File Globbing
 
 ##### Qualquer Coisa *
 
@@ -176,7 +232,7 @@ ls [^fFrR]* # Todos que não começam com f F r R
 
 
 
-## Quotting " "
+# Quotting " "
 
 
 
@@ -201,7 +257,7 @@ echo 'O usuário logado é o $LOGNAME'
 
 
 
-## Detalhes do terminal
+# Detalhes do terminal
 
 $ -> Usuario comum
 
@@ -264,9 +320,22 @@ whereis firefox
 
 
 
+# Documentações e manuais
+
+```bash
+$ man -l
+$ cd /usr/shate/doc
+
+# Para ler os arquivos compáctador utulizar o comando
+$ man -l arq.gz
+
+# Profile de configuração
+cat /usr/shate/man/pt_BR/man1/etc/profile
+```
 
 
-## Compactar e Comprimir
+
+# Compactar e Comprimir
 
 Compactar X Comprimir
 
@@ -346,7 +415,7 @@ unxz etc.xz
 
 
 
-## Analise de arquivos/logs
+# Analise de arquivos/logs
 
 #### $ less
 
@@ -356,7 +425,7 @@ unxz etc.xz
 
 
 
-## Redirecionamentos de comandos
+# Redirecionamentos de comandos
 
 ##### Standart In
 
@@ -399,4 +468,268 @@ apt update
 | -------- | ------------------------------------ |
 | STDOUT   | 1>           1>>         >        >> |
 | STDERROR | 2>           2>>                     |
+
+
+
+
+
+# Ciclo de vida Distribuições
+
+
+
+|             | Red Hat Ent Linux | Fedora | Suse     | OpenSuse | Debian   | Ubuntu |
+| ----------- | ----------------- | ------ | -------- | -------- | -------- | ------ |
+| C.V         | 10 anos           | 1 ano  | 7 anos   | 18 mes   | 3-4 anos | 5 anos |
+| C.A (Patch) | 3-4 ano           | 6 mes  | 3-4 anos | 8 mes    | 2 anos   | 6 anos |
+
+
+
+
+
+# Informações de hardware
+
+ 
+
+| Componente            | Comando para visualizar dados        |
+| --------------------- | ------------------------------------ |
+| Processador           | cat /proc/cpuinfo                    |
+| Memoria               | free -h                              |
+| Placa mãe             | dmidecode -t baseboard               |
+| Fonte                 |                                      |
+| Disco / Armazenamento | $ fdisk -l<br />$ lsblk<br />$ df -h |
+
+
+
+# Gerenciamento de processos
+
+```bash
+ps
+ps -u username
+ps --all
+top --> k (kill)
+```
+
+ 
+
+
+
+# Gerenciamento de logs
+
+#### Arquivo de configuração dos logs.
+
+Esse arquivo monitora todas as mensagens do sistema e envia para seus respectivos files de log de acordo com a configuração desse arquivo
+
+##### 	/etc/rsyslog.d/50-default.conf
+
+
+
+#### Logs do OS são encontrados no diretório
+
+##### 	/var/log/*
+
+Cada file é tem uma responsabilidade especifica
+
+
+
+Para os logs gerais do Kernel pode acessar
+
+```bash
+cat /var/log/kern.log
+```
+
+
+
+#### Dump da memoria
+
+```bash
+dmesg
+```
+
+
+
+
+
+# Redes
+
+```bash
+## IP
+ip addr show
+ifconfig
+## Rotas
+iproute
+route
+netstat -r
+## Portas
+netstat -tulpn | grep LISTEN
+ss -ln
+## Resolução de nomes / DNS
+cat /etc/resolv.conf
+cat /etc/hosts
+```
+
+
+
+
+
+# Segurança Básica e Identificação de tipos de usuário
+
+ 
+
+#### Usuários conectados
+
+```bash
+## Usuários conectados
+who
+w
+last # histórico de sessões
+last reboot # histórico de reboot 
+
+```
+
+
+
+#### Arquivo de permissões de usuários para sudo 
+
+* ##### /etc/sudoers
+
+#### Arquivo de grupos de usuários
+
+* ##### /etc/group  -> | grep username
+
+#### Usuarios
+
+* ##### /etc/passwd 
+
+#### Senhas - Configuração de expiração de senhas
+
+* ##### /etc/shadow
+
+
+
+# Criar usuários e grupos
+
+#### Skeleton - Esqueleto
+
+Arquivo de configuração do /home de todos os novos usuários. Esse arquivo define quais arquivos padrões mínimos os usuarios devem ter no seu /home
+
+* ##### /etc/skel
+
+#### Criar grupo
+
+```bash
+groupadd {Nome Grupo}
+```
+
+#### Criar usuários
+
+```bash
+$ useradd -G 1003 -m -c "Felipe Grings" felipe
+# {comando} -G {grupo complementar} -m (Criar /home) -c {Comentario} {nome do usuario}
+
+# Verificar a criação
+$ cat /etc/passwd | grep felipe
+
+# Alterar configurações do usuarios
+$ usermod --help
+
+# Adicionar senha
+$ passwd felipe
+```
+
+
+
+#### Configuração de inicialização de novos Usuarios (Shell, /home, skel,...)
+
+* #### /etc/default/useradd
+
+
+
+
+
+# Permissões de arquivos e ownership
+
+#### Permissões 
+
+- {R}ead - 4
+- {W}rite - 2
+- E{x}ecute - 1
+
+#### Grupos de permissões e Escrita numérica
+
+| A quem pertence             | Dono do Arquivo | Grupo do Dono do arquivo | Resto dos usuarios |
+| :-------------------------- | :-------------: | :----------------------: | :----------------: |
+| Completa                    |       rw-       |           rw-            |        r-x         |
+| Numerica (soma dos valores) |        6        |            6             |         5          |
+
+#### 		
+
+#### Comandos para manipulação
+
+```bash
+# Permissão de Arquivo
+chmod o+rwx u+rwx g+rwx file.sh # o=rw | o-r
+# o (others) u (user) g (group)
+chmod 777 file.sh
+# -R para recursividade Ex.: chmod 777 -R files/
+
+# Permissão de proprietario
+chown felipe:financeiro file3.sh
+# {usuario:grupo}
+
+# Alterar apenas o grupo
+chgrp financeiro file2.sh
+```
+
+
+
+
+
+# Link simbólico x Link Físico
+
+#### Estruturação de dados linux
+
+Os arquivos são alocados em memória localizados Inodes. Cada Inode deve conter 1 conexão para exister.
+
+Link simbolico gera um novo Inode apontando para o Inode do arquivo apontado
+
+Link Fisico apresenta um novo file apontando exatamente para o mesmo Inode
+
+
+
+#### Representação grafica
+
+![image-20200729191000503](/home/teste/.config/Typora/typora-user-images/image-20200729191000503.png)
+
+#### Código exemplo
+
+```bash
+touch teste
+ln -s teste linkSymb # Gera um link simbólico com o teste
+ls -l
+ls- i
+rm teste
+touch teste
+ln teste linkHard # HardLink
+ls -i
+ln linkSymb ShouldBeHard # Gera um link simbólico, pois o link hard ta apontando para um link simb
+ls -l
+```
+
+
+
+#### Permissão especial Stick Bit
+
+Permissão para diretórios onde apenas o dono do diretório e quem criou o arquivo tem permissão de remover.
+
+Para adicionar a permissão Stick Bit existem as seguinte maneiras:
+
+```bash
+# Para Adicionar
+chmod 1777 dirTeste # 1 é repsonsavel por ativar o Stick Bit
+chmod o+t dirTeste # t = s{t}ick bit
+
+# Para remover
+chmod 0777 dirTeste
+chmod o-t dirTeste
+```
 
